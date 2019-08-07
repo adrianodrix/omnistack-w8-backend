@@ -9,7 +9,7 @@ module.exports = {
     const targetDev = await Dev.findById(id)
 
     if (!targetDev) {
-      return res.status(400).json({ error: 'Dev not exists'})
+      return res.status(404).json({ error: 'Dev not exists'})
     }
 
     
