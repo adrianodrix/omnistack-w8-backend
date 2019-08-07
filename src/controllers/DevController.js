@@ -8,6 +8,10 @@ module.exports = {
     const user = req.header('Content-User')       
     const loggedDev = await Dev.findById(user)
 
+    if (!loggedDev) {
+      return res.status(404).json({ error: 'Dev not exists'})
+    }
+
     const users = await Dev.find({
       $and: [
         { _id: { $ne: user } },
