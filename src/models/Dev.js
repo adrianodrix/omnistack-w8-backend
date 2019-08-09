@@ -24,6 +24,7 @@ const DevSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Dev'
   }],
+  socket: String,
 }, {
   timestamps: true
 })
