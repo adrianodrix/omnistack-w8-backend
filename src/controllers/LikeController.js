@@ -5,7 +5,6 @@ module.exports = {
     const user = req.header('Content-User')
     const { id } = req.params
     
-
     const loggedDev = await Dev.findById(user)
     const targetDev = await Dev.findById(id)
 
@@ -14,7 +13,11 @@ module.exports = {
     }
 
     if (targetDev.likes.includes(loggedDev._id)) {
-      console.log('DEU MATH')
+      const loggedSocket = loggedDev.socket
+      const targetSocket = targetDev.socket
+
+      if (loggedSocket) req.io.to(loggedSocket).emit('match', targetDev)
+      if (targetSocket) req.io.to(targetSocket).emit('match', loggedDev)
     }
 
     loggedDev.likes.push(targetDev._id)
